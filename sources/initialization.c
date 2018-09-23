@@ -6,31 +6,31 @@
 /*   By: juwong <juwong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/10 23:25:39 by juwong            #+#    #+#             */
-/*   Updated: 2018/09/11 21:44:20 by juwong           ###   ########.fr       */
+/*   Updated: 2018/09/21 18:25:23 by juwong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/push_swap.h"
 
-t_tower		*init_tower(int	*arr, int size)
+t_tower		*init_tower(void)
 {
 	int			i;
 	t_tower		*tower;
 
 	i = -1;
 	tower = (t_tower*)malloc(sizeof(t_tower));	
-	tower->moves = 0;
-	tower->a = NULL;
+	tower->moves = NULL;
 	tower->b = NULL;
-
-	while (++i <= size)
-	{
-		ft_lst_pushback(&(tower->a), &(arr[i]), sizeof(int));
-	}
+	tower->a = NULL;
+	tower->debug = 0;
+	tower->color = 0;
+	tower->printsort = 0;
+	tower->printlen = 0;
+	tower->printmove = 0;
 	return (tower);
 }
 
-int			valid_nbr(int i, char **argv)
+int			valid_nbr(int i, char **argv, t_list *list)
 {
 	int		x;
 	long	tmp;
@@ -44,30 +44,65 @@ int			valid_nbr(int i, char **argv)
 			return (0);
 		tmp = ft_atol(argv[i]);
 		if (tmp > INT_MAX || tmp < INT_MIN)
-			return (0);			
+			return (0);
+		if (i != 0 && isdupe(list, (int)tmp))
+			return (0);
 	}
 	return (1);
 }
 
-int			ps_init_args(t_tower *tower, int argc, char **argv)
+int		handle_options(int i, char **argv, t_tower **tower)
+{
+	while (argv[i])
+	{
+		if (ft_strequ(argv[i], "-d"))
+			(*tower)->debug = 1;
+		else if (ft_strequ(argv[i], "-c"))
+			(*tower)->color = 1;
+		else if (ft_strequ(argv[i], "-m"))
+			(*tower)->printmove = 1;
+		else if (ft_strequ(argv[i], "-l"))
+			(*tower)->printlen = 1;
+		else
+			break;
+		i++;
+	}
+	return (i);
+}
+
+int			ps_init_args(t_tower **tower, int argc, char **argv)
 {
 	int		i;
 	int		tmp;
-	int		arr[argc];
 
 	i = 0;
+	*tower = init_tower();
 	while (++i < argc)
 	{
-		ft_printf("printed\n");
-		if (!valid_nbr(i, argv))
-			return (0);
+		if (i == 1)
+			i = handle_options(i, argv, tower);
+		if (!valid_nbr(i, argv, (*tower)->a))
+		{
+			ft_putstr_fd("Error\n", 2);
+			close_env(*tower);
+			exit (1);
+		}
 		tmp = ft_atoi(argv[i]);
-		ft_printf("1\n");
-		if (i != 0 && isdupe(arr, (int)tmp, i - 1))
-			return (0);
-		ft_printf("2\n");
-		arr[i - 1] = (int)tmp;
+		ft_lst_pushback((t_list**)&(*tower)->a, &tmp, sizeof(int));
 	}
-	tower = init_tower(arr, i - 1);
+	
 	return (1);
+}
+
+void		close_env(t_tower *tower)
+{
+	if (tower->a)
+		ft_lstdel(&tower->a, ft_freecontent);
+	if (tower->b)
+		ft_lstdel(&tower->b, ft_freecontent);
+	if (tower->moves)
+		ft_lstdel(&tower->moves, ft_freecontent);
+	free(tower);
+	sleep (60);
+	exit (1);
 }

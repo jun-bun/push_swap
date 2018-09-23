@@ -6,7 +6,7 @@
 #    By: juwong <juwong@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/06/20 11:00:07 by juwong            #+#    #+#              #
-#    Updated: 2018/09/11 21:59:20 by juwong           ###   ########.fr        #
+#    Updated: 2018/09/20 22:42:32 by juwong           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -83,6 +83,9 @@ SRC = ft_putchar.c \
 					ft_freecontent.c \
 					ft_atol.c \
 					ft_isspace.c \
+					ft_lst_len.c \
+					ft_abs.c \
+					ft_sqroot.c \
 					get_next_line.c
 
 .PHONY: all clean fclean re

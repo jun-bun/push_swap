@@ -6,7 +6,7 @@
 /*   By: juwong <juwong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/09 21:52:47 by juwong            #+#    #+#             */
-/*   Updated: 2018/09/10 23:25:36 by juwong           ###   ########.fr       */
+/*   Updated: 2018/09/21 21:56:21 by juwong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,53 +14,38 @@
 
 int		main(int argc, char **argv)
 {
-	t_list	*list;
-	int		num;
-	int		i;
-
-	i = 1;
-	list = NULL;
-	if (argc > 1)
-	{
-		while (i < argc)
-		{
-			num = ft_atoi(argv[i]);
-			ft_lst_pushback(&list, &num, sizeof(int));
-			list->content = list->content;
-			i++;
-		}
-	}
-	push_swap(list);
-	return (1);
+	t_tower	*tower;
+	
+	tower = NULL;
+	if (argc < 2)
+		return (0);
+	ps_init_args(&tower, argc, argv);
+	push_swap(tower);
+	close_env(tower);
+	return (0);
 }
 
-void	push_swap(t_list *list)
+void test_sort(t_list *list)
+{	
+	t_list		*new;
+	
+	new = sort_list(list);
+	print_list(list);
+	print_list(new);
+}
+
+void	push_swap(t_tower *tower)
 {
-	t_tower		*tower;
+//	merge_sort(tower);
 
-	tower = init_tower(list);
+//	ft_printf("%d \n", get_pivot(1, 1, tower->a));
+//	ft_printf("%d \n", get_pivot(3, 1, tower->a));
 
-//	swap(&(tower->a));
-//	rotate(&(tower->a));
-//	rrotate(&tower->a);
-	ps_move(tower, pb);
-	ps_move(tower, pb);
-	ps_move(tower, sa);
-	ps_move(tower, sb);
+	start_sort(tower);
 	print_list(tower->a);
 	print_list(tower->b);
 	print_list(tower->moves);
-}
+	ft_printf("|%d|", ft_lst_len(tower->moves));
 
-void print_list(t_list *list)
-{
-	t_list		*tmp;
-
-	tmp = list;
-	while (tmp)
-	{
-		ft_printf("|%d|", *(int*)tmp->content);
-		tmp = tmp->next;
-	}
-	ft_printf("\n");
+//	test_sort(tower->a);
 }

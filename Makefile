@@ -6,22 +6,24 @@
 #    By: juwong <juwong@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/06/20 11:00:07 by juwong            #+#    #+#              #
-#    Updated: 2018/09/11 20:32:42 by juwong           ###   ########.fr        #
+#    Updated: 2018/09/21 18:45:55 by juwong           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME1	= push_swap
 NAME2	= checker
 
-SRC1	=	push_swap.c moves.c initialization.c
+SRC1	=	push_swap.c moves.c error_handling.c initialization.c helper.c \
+merge_sort.c sorts.c print.c algorithm.c
 
-SRC2	=	checker.c moves.c error_handling.c initialization.c
+SRC2	=	checker.c moves.c error_handling.c initialization.c helper.c \
+print.c
 
 OBJ1		= $(addprefix $(OBJDIR),$(SRC1:.c=.o))
 OBJ2		= $(addprefix $(OBJDIR),$(SRC2:.c=.o))
 
 CC		= gcc
-CFLAGS	= -Wall -Wextra -Werror -g
+CFLAGS	= -Wall -Wextra -Werror -g 
 
 LIBFT	= ./libft/libft.a
 LIBINC	= -I./libft/includes/
@@ -33,7 +35,7 @@ SRCDIR	= ./sources/
 INCDIR	= ./includes/
 OBJDIR	= ./obj/
 
-all: obj libft $(NAME2) #$(NAME1)
+all: obj libft $(NAME2) $(NAME1)
 
 obj:
 	mkdir -p $(OBJDIR)
@@ -49,8 +51,8 @@ $(LIBFT):
 $(NAME2): $(OBJ2)
 	$(CC) $(LDFLAGS) -o $(NAME2) $(OBJ2) $(LIBLINK) -L. -lftprintf
 
-#$(NAME1): $(OBJ1)
-#	$(CC) $(LDFLAGS) -o $(NAME1) $(OBJ1) $(LIBLINK) -L. -lftprintf
+$(NAME1): $(OBJ1)
+	$(CC) $(LDFLAGS) -o $(NAME1) $(OBJ1) $(LIBLINK) -L. -lftprintf
 
 
 clean:

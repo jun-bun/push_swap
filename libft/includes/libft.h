@@ -6,7 +6,7 @@
 /*   By: juwong <juwong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/18 18:26:36 by juwong            #+#    #+#             */
-/*   Updated: 2018/09/11 20:43:44 by juwong           ###   ########.fr       */
+/*   Updated: 2018/09/20 21:59:07 by juwong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,13 @@
 # include <string.h>
 # define CHECKNULL(x) if (!x) return (-1);
 # define CHECKFREE(x) if (x) free(x);
+# define RED "\033[0;31m"
+# define GREEN "\033[0;32m"
+# define BLUE "\033[0;34m"
+# define WHITE "\033[0;37m"
+# define YELLOW "\033[0;33m"
+# define END "\033[0m"
+# define ABS(N) ((N<0)?(-N):(N));
 
 typedef struct	s_string_var
 {
@@ -105,5 +112,8 @@ void			ft_lst_pushfront(t_list **lst, void *content, size_t
 void			ft_freecontent(void *content, size_t size);
 int				ft_isspace(int c);
 long			ft_atol(const char *str);
+int     		ft_lst_len(t_list *list);
+int				ft_abs(int num);
+int				ft_sqroot(int num);
 
 #endif

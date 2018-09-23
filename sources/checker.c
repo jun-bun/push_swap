@@ -6,7 +6,7 @@
 /*   By: juwong <juwong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/09 21:52:47 by juwong            #+#    #+#             */
-/*   Updated: 2018/09/11 20:46:40 by juwong           ###   ########.fr       */
+/*   Updated: 2018/09/15 22:23:06 by juwong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,40 +37,37 @@ int		handle_moves(t_tower *tower, char *line)
 	else if (ft_strequ(line, "rrr"))
 		ps_move(tower, rrr);
 	else
-		return (-1);
+		return (1);
 	return (0);
 }
 
 int		main(int argc, char **argv)
 {
 	t_tower *tower;
-//	char	*line;
+	char	*line;
 
 	tower = NULL;
 	if (argc < 2)
 		return (0);
-	if (!(ps_init_args(tower, argc, argv)))
-		ft_putstr_fd("Error\n", 2);
-	/*
-	while (ft_get_next_line(0, &line) > 0)
+	ps_init_args(&tower, argc, argv);
+	while (get_next_line(0, &line) > 0)
 	{
 		if (ft_strequ(line, ""))
 			break ;
-		if (handle_moves(&tower, line))
+		if (handle_moves(tower, line))
 		{
 			free(line);
-			close_env(&tower);
+			close_env(tower);
 			ft_putstr_fd("Error\n", 2);
 			exit(1);
 		}
 		free(line);
 	}
 	free(line);
-	if (is_sort(&ps))
+	if (issort(tower))
 		ft_putstr("OK\n");
 	else
 		ft_putstr("KO\n");
-	close_env(&ps);
-	*/
+	close_env(tower);
 	return (0);
 }

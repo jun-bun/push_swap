@@ -6,7 +6,7 @@
 /*   By: juwong <juwong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/10 14:58:52 by juwong            #+#    #+#             */
-/*   Updated: 2018/09/10 19:32:03 by juwong           ###   ########.fr       */
+/*   Updated: 2018/09/18 19:35:25 by juwong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ void			swap(t_list	**list)
 void			push(t_list **a, t_list **b)
 {
 	t_list      *tmp;
+	
 	if (*a)
 	{
 		tmp = *a;
@@ -104,4 +105,6 @@ void ps_move(t_tower *tower, enum e_move move)
 		rrotate(&tower->a);
 		rrotate(&tower->b);
 	}
+	if (tower->debug == 1)
+		print_debug(tower, move);
 }
