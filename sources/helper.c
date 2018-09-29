@@ -6,7 +6,7 @@
 /*   By: juwong <juwong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/15 21:01:28 by juwong            #+#    #+#             */
-/*   Updated: 2018/09/21 19:52:07 by juwong           ###   ########.fr       */
+/*   Updated: 2018/09/28 22:07:15 by juwong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,9 +121,37 @@ int		find_distance(int point, int len)
 	if (point <= len / 2)
 		return (point);
 	else
-		return (point - len + 1);
+		return (point - len - 1);
 }
 
+int		get_index(t_list *list, int num)
+{
+	int		i;
+
+	i = 0;
+	while (list)
+	{
+		i++;
+		if (*(int*)list->content == num)
+			break;
+		list = list->next;
+	}
+	return (i);
+}
+
+int		get_max(t_list	*list, int	len)
+{	
+	int		max = INT_MIN;
+	
+	while (list && len)
+	{
+		if (*(int*)list->content < max)
+			max = *(int*)list->content;
+		list = list->next;
+		len--;
+	}
+	return (max);
+}
 /*
 enum e_move	get_direction(int	num, t_list	*list)
 {

@@ -6,7 +6,7 @@
 /*   By: juwong <juwong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/10 23:25:39 by juwong            #+#    #+#             */
-/*   Updated: 2018/09/21 18:25:23 by juwong           ###   ########.fr       */
+/*   Updated: 2018/09/29 00:15:31 by juwong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,14 +40,16 @@ int			valid_nbr(int i, char **argv, t_list *list)
 	{
 		if ((!ft_isdigit(argv[i][x])) && !(argv[i][x] == '-' && x == 0))
 			return (0);
-		if (x > 11)
-			return (0);
-		tmp = ft_atol(argv[i]);
-		if (tmp > INT_MAX || tmp < INT_MIN)
-			return (0);
-		if (i != 0 && isdupe(list, (int)tmp))
-			return (0);
 	}
+	if (x > 11)
+		return (0);
+	if (x == 0)
+		return (0);
+	tmp = ft_atol(argv[i]);
+	if (tmp > INT_MAX || tmp < INT_MIN)
+		return (0);
+	if (i != 0 && isdupe(list, (int)tmp))
+		return (0);
 	return (1);
 }
 
@@ -79,6 +81,11 @@ int			ps_init_args(t_tower **tower, int argc, char **argv)
 	*tower = init_tower();
 	while (++i < argc)
 	{
+		if (!argv[i][0])
+		{
+			close_env(*tower);
+			exit (1);
+		}
 		if (i == 1)
 			i = handle_options(i, argv, tower);
 		if (!valid_nbr(i, argv, (*tower)->a))
@@ -90,7 +97,6 @@ int			ps_init_args(t_tower **tower, int argc, char **argv)
 		tmp = ft_atoi(argv[i]);
 		ft_lst_pushback((t_list**)&(*tower)->a, &tmp, sizeof(int));
 	}
-	
 	return (1);
 }
 
@@ -103,6 +109,5 @@ void		close_env(t_tower *tower)
 	if (tower->moves)
 		ft_lstdel(&tower->moves, ft_freecontent);
 	free(tower);
-	sleep (60);
 	exit (1);
 }

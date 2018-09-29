@@ -6,7 +6,7 @@
 /*   By: juwong <juwong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/18 16:18:03 by juwong            #+#    #+#             */
-/*   Updated: 2018/09/18 17:22:25 by juwong           ###   ########.fr       */
+/*   Updated: 2018/09/25 19:32:35 by juwong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,4 +69,30 @@ void		print_debug(t_tower *tower, enum e_move move)
 		if (tower->printmove)
 			ft_printf("Move # %d", ft_lst_len(tower->moves));
 		ft_printf("\n\n");
+}
+
+void		print_move(t_list *list)
+{
+		if (*(enum e_move*)list->content == sa)
+			ft_printf("sa\n");
+		if (*(enum e_move*)list->content == sb)
+			ft_printf("sb\n");
+		if (*(enum e_move*)list->content == ss)
+			ft_printf("ss\n");
+		if (*(enum e_move*)list->content == pa)
+			ft_printf("pa\n");
+		if (*(enum e_move*)list->content == pb)
+			ft_printf("pb\n");
+		if (*(enum e_move*)list->content == ra)
+			ft_printf("ra\n");
+		if (*(enum e_move*)list->content == rb)
+			ft_printf("rb\n");
+		if (*(enum e_move*)list->content == rr)
+			ft_printf("rr\n");
+		if (*(enum e_move*)list->content == rra)
+			ft_printf("rra\n");
+		if (*(enum e_move*)list->content == rrb)
+			ft_printf("rrb\n");
+		if (*(enum e_move*)list->content == rrr)
+			ft_printf("rrr\n");
 }

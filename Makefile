@@ -6,7 +6,7 @@
 #    By: juwong <juwong@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/06/20 11:00:07 by juwong            #+#    #+#              #
-#    Updated: 2018/09/21 18:45:55 by juwong           ###   ########.fr        #
+#    Updated: 2018/09/28 19:49:10 by juwong           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME1	= push_swap
 NAME2	= checker
 
 SRC1	=	push_swap.c moves.c error_handling.c initialization.c helper.c \
-merge_sort.c sorts.c print.c algorithm.c
+merge_sort.c sorts.c print.c algorithm.c sortsmall.c
 
 SRC2	=	checker.c moves.c error_handling.c initialization.c helper.c \
 print.c

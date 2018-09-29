@@ -6,7 +6,7 @@
 /*   By: juwong <juwong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/09 21:52:47 by juwong            #+#    #+#             */
-/*   Updated: 2018/09/21 21:56:21 by juwong           ###   ########.fr       */
+/*   Updated: 2018/09/29 00:07:26 by juwong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,16 +36,6 @@ void test_sort(t_list *list)
 
 void	push_swap(t_tower *tower)
 {
-//	merge_sort(tower);
-
-//	ft_printf("%d \n", get_pivot(1, 1, tower->a));
-//	ft_printf("%d \n", get_pivot(3, 1, tower->a));
-
 	start_sort(tower);
-	print_list(tower->a);
-	print_list(tower->b);
-	print_list(tower->moves);
-	ft_printf("|%d|", ft_lst_len(tower->moves));
-
-//	test_sort(tower->a);
+	ft_lstiter(tower->moves, print_move);
 }

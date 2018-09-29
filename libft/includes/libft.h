@@ -6,7 +6,7 @@
 /*   By: juwong <juwong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/18 18:26:36 by juwong            #+#    #+#             */
-/*   Updated: 2018/09/20 21:59:07 by juwong           ###   ########.fr       */
+/*   Updated: 2018/09/27 19:26:33 by juwong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,5 +115,7 @@ long			ft_atol(const char *str);
 int     		ft_lst_len(t_list *list);
 int				ft_abs(int num);
 int				ft_sqroot(int num);
+int				ft_str2dlen(char **s);
+void    		ft_str2ddel(char ***s);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: juwong <juwong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/09 21:38:04 by juwong            #+#    #+#             */
-/*   Updated: 2018/09/21 20:50:47 by juwong           ###   ########.fr       */
+/*   Updated: 2018/09/28 15:15:13 by juwong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,6 +98,11 @@ void			rrotate(t_list **list);
 void			print_list(t_list *list);
 
 /*
+** Print functions
+*/
+void			print_move(t_list *list);
+
+/*
 ** Error handling
 */
 
@@ -128,12 +133,17 @@ t_min			get_next_mins(t_list *list);
 t_min			getmin(t_list *list);
 int				isascending(t_list *list);
 int				isdecending(t_list *list);
+int				get_index(t_list *list, int num);
+int				get_max(t_list	*list, int len);
 
 /*
 ** Sort functions
 */
 void			insert_list_ascending(t_list **list, t_list	*node);
 t_list 			*sort_list(t_list *list);
+void			sort2(t_tower *tower);
+void			sort3(t_tower *tower);
+void			sortsmall(t_tower *tower);
 
 /*
 ** Algorithm
@@ -142,6 +152,8 @@ void    start_sort(t_tower *tower);
 int		partition_a(t_tower *tower);
 int     find_pivot_value(t_list *list, int index);
 int		get_pivot(int qty, int minmax,	t_list *list);
+void	insertion_sort(t_tower *tower);
+
 
 /*
 ** Cleanup functions

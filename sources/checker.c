@@ -6,7 +6,7 @@
 /*   By: juwong <juwong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/09 21:52:47 by juwong            #+#    #+#             */
-/*   Updated: 2018/09/15 22:23:06 by juwong           ###   ########.fr       */
+/*   Updated: 2018/09/28 19:52:18 by juwong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,14 +56,13 @@ int		main(int argc, char **argv)
 			break ;
 		if (handle_moves(tower, line))
 		{
+			ft_printf("Error\n");
 			free(line);
 			close_env(tower);
-			ft_putstr_fd("Error\n", 2);
 			exit(1);
 		}
 		free(line);
 	}
-	free(line);
 	if (issort(tower))
 		ft_putstr("OK\n");
 	else

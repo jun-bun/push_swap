@@ -6,7 +6,7 @@
 /*   By: juwong <juwong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/20 20:33:46 by juwong            #+#    #+#             */
-/*   Updated: 2018/09/21 23:18:48 by juwong           ###   ########.fr       */
+/*   Updated: 2018/09/28 23:57:12 by juwong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,36 +31,37 @@ int     find_pivot_value(t_list *list, int index)
 	return (*(int*)tmp->content);
 }
 
+
 int		partition_a(t_tower *tower)
 {
-	int     len;
 	int     pivot;
 	int		index;
 	int		i;
 	t_list	*l;
 
-	len = ft_lst_len(tower->a);
-	index = len / ft_sqroot(len) * 2;
-	while (len > 2)
+	index = ft_sqroot(ft_lst_len(tower->a)) * 4;
+	while (tower->a)
 	{
 		i = index;
 		l = sort_list(tower->a);
 		pivot = find_pivot_value(l, index);
-		ft_lstdel(&l, ft_freecontent);
 		while (i >= 1 && tower->a)
 		{
 			if (*(int*)tower->a->content <= pivot)
-			{	
+			{
 				ps_move(tower, pb);
+				if (find_pivot_value(l, index / 2) > *(int*)tower->b->content)
+					ps_move(tower, rb);
 				i--;
-				len--;
 			}
 			else
 				ps_move(tower, ra);
 		}
+		ft_lstdel(&l, ft_freecontent);
 	}
 	return (index);
 }
+
 
 int		find_max(t_list *list)
 {
@@ -84,12 +85,14 @@ int		get_direction(t_list *list, int pivot, char	equality)
 
 	len = ft_lst_len(list);
 	i = 0;
+	shortest = INT_MAX;
 	while (list)
 	{
-		if ((equality == '>' && (pivot >= *(int*)list->content)) ||
-			((equality == '<') && (pivot <= *(int*)list->content)))
+		if ((equality == '>' && (*(int*)list->content >= pivot)) ||
+			((equality == '<') && (*(int*)list->content <= pivot)))
 		{
-			if (ft_abs(shortest) < ft_abs(find_distance(i, len)))
+
+			if (ft_abs(find_distance(i, len)) < ft_abs(shortest))
 				shortest = find_distance(i, len);
 		}
 		list = list->next;
@@ -122,30 +125,45 @@ int		get_pivot(int qty, int minmax,	t_list *list)
 		return (pivot);
 }
 
+
 void	insertion_sort(t_tower *tower)
 {
 	int			pivot;
 	int			direction;
 	int			qty;
+	int			split;
+	int			i;
 
 	while (tower->b)
 	{
-		qty = 2;
-	while (qty > 0 && tower->b)
-	{
+		qty = 4;
 		pivot = get_pivot(qty, 1, tower->b);
-		direction = get_direction(tower->b, pivot, '>');
-		while (*(int*)tower->b->content < pivot)
+		split = get_pivot(qty / 2, 1, tower->b);
+		i = 1;
+		while (qty > 0 && tower->b)
 		{
-			if (direction < 0)
-				ps_move(tower, rrb);
-			else
-				ps_move(tower, rb);
-			printf("%d \n", pivot);
+			while (*(int*)tower->b->content < pivot)
+			{
+				direction = get_direction(tower->b, pivot, '>');
+				if (direction < 0)
+					ps_move(tower, rrb);
+				else
+					ps_move(tower, rb);
+			}
+			qty = *(int*)tower->b->content == get_max(tower->b, INT_MAX) ? 0 : --qty;
+			ps_move(tower, pa);
+			if (*(int*)tower->a->content < split)
+			{
+				ps_move(tower, ra);
+				i++;
+			}
+			sort2(tower);
 		}
-		qty = *(int*)tower->b->content == pivot ? 0 : qty--;
-		ps_move(tower, pa);
-	}
+		while (--i)
+			{
+				ps_move(tower, rra);
+				sort2(tower);
+			}
 	}
 }
 
@@ -166,9 +184,13 @@ void    start_sort(t_tower *tower)
 {
 	int		sub_size;
 
-	sub_size = partition_a(tower);
-	if (ft_lst_len(tower->a) == 2)
-		swap2(tower);
-	insertion_sort(tower);
-	ft_printf("size == %d\n", sub_size);
+	if (ft_lst_len(tower->a) <= 16)
+		sortsmall(tower);
+	else
+	{
+		sub_size = partition_a(tower);
+		if (ft_lst_len(tower->a) == 2)
+		sort3(tower);
+		insertion_sort(tower);
+	}
 }

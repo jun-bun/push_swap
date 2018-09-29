@@ -1,28 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lst_len.c                                       :+:      :+:    :+:   */
+/*   ft_str2dlen.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: juwong <juwong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/09/16 01:03:52 by juwong            #+#    #+#             */
-/*   Updated: 2018/09/28 02:28:00 by juwong           ###   ########.fr       */
+/*   Created: 2018/09/27 18:41:12 by juwong            #+#    #+#             */
+/*   Updated: 2018/09/27 19:02:15 by juwong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "includes/libft.h"
+#include "../includes/libft.h"
 
-int     ft_lst_len(t_list *list)
+int ft_str2dlen(char **s)
 {
-	int     i;
+    int     i = 0;
 
-	i = 0;
-	if (!list)
-		return (0);
-	while (list)
-	{
-		i++;
-		list = list->next;
-	}
-	return (i);
+    while (s[i])
+        i++;
+    return(i);
 }
